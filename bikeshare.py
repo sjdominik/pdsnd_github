@@ -17,7 +17,7 @@ def get_filters():
     """
     print('Hello! Let\'s explore some US bikeshare data!')
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    
+
     while True:
         try:
             city = input('For which city would you like to see data? Chicago, New York City or Washington?\n').strip().lower()
@@ -28,7 +28,7 @@ def get_filters():
         except KeyboardInterrupt:
             print('\nNo input taken. Please enter one of the three cities listed above.')
 
-        
+
 
     # TO DO: get user input for month (all, january, february, ... , june)
     while True:
@@ -49,9 +49,9 @@ def get_filters():
                 break
             else:
                 print('Please enter the name of the day or \'All\' if you don\'t want to filter by day. Don\'t use abreviations')
-        except:
+        except KeyboardInterrupt:
             print('\nNo input taken. Please enter the name of the day or \'All\' if you don\'t want to filter by day. Don\'t use abreviations')
-                
+
     print('-'*40)
     return city, month, day
 
@@ -67,7 +67,7 @@ def load_data(city, month, day):
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
     """
-    
+
     df = pd.read_csv(CITY_DATA[city])
     df['Start Time'] = pd.to_datetime(df['Start Time'])
     df['month'] = df['Start Time'].dt.month
@@ -105,7 +105,6 @@ def time_stats(df):
     popular_start_hour = df["hour"].mode()[0]
     print("The most common start hour is {}".format(popular_start_hour))
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 
@@ -126,7 +125,6 @@ def station_stats(df):
     popular_combination = df.groupby(["Start Station", "End Station"]).size().idxmax()
     print('The most popular combination is {}'.format(' - '.join(popular_combination)))
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 
@@ -135,7 +133,7 @@ def trip_duration_stats(df):
 
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
-    
+
     df['Trip Duration'] = df['End Time'] - df['Start Time']
     # TO DO: display total travel time
     total_trip_duration = df['Trip Duration'].dt.total_seconds().sum()
@@ -145,7 +143,6 @@ def trip_duration_stats(df):
     mean_trip_duration = df['Trip Duration'].dt.total_seconds().mean()
     print('The mean trip duration is {} seconds'.format(mean_trip_duration))
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 
@@ -165,7 +162,7 @@ def user_stats(df):
         print('\nThe gender count is:\n{}'.format(gender_count))
     else:
         print("No gender data to display.")
-    
+
     # TO DO: Display earliest, most recent, and most common year of birth
     if 'Birth Year' in df.columns:
         earliest_yob = df['Birth Year'].min()
@@ -176,8 +173,7 @@ def user_stats(df):
         print('The most common year of birth is:\n{}'.format(int(most_common_yob)))
     else:
         print('No birth year data to display.')
-   
-    print("\nThis took %s seconds." % (time.time() - start_time))
+
     print('-'*40)
 
 
@@ -199,11 +195,11 @@ def main():
                 counter += 5
                 see_raw_data = input('Would you like to see 5 more rows? Please enter yes or no: ').lower()
                 if see_raw_data != 'yes':
-                    break        
-        
+                    break
+
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
-     
+
 if __name__ == "__main__":
 	main()
