@@ -49,7 +49,7 @@ def get_filters():
                 break
             else:
                 print('Please enter the name of the day or \'All\' if you don\'t want to filter by day. Don\'t use abreviations')
-        except:
+        except KeyboardInterrupt:
             print('\nNo input taken. Please enter the name of the day or \'All\' if you don\'t want to filter by day. Don\'t use abreviations')
 
     print('-'*40)
