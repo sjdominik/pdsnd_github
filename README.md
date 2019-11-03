@@ -1,5 +1,5 @@
 ### Date created
-The Bikeshare project was created in October 2019. This README file was created today, the 3rd of November 2019.
+The Bikeshare project was finished on the 16th of October 2019. This README file was created today, the 3rd of November 2019.
 
 ### Project Title
 Bikeshare
